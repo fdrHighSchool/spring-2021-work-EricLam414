@@ -27,6 +27,12 @@ public class SuperArray{
 
   }
   public void add(int index, int val){
+    grow(1);
+
+    for(int i = this.array.length - 1; i > index; i--){
+      this.array[i] = this.array[i-1];
+    }
+    this.array[index] = val;
 
   }
 

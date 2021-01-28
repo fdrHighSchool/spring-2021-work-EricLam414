@@ -12,5 +12,7 @@ public class Driver{
     System.out.println(array1.toString());
     array1.remove(2);
     System.out.println(array1.toString());
+    array1.add(2,300);
+    System.out.println(array1.toString());
   } //end main
 } //end class
