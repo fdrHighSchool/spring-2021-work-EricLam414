@@ -7,13 +7,19 @@ public class SuperArray{
   public SuperArray(int s){
     this.array = new int[s];
     System.out.println(this.array.length);
-  }
+  }//end SuperArray
 
   public SuperArray(){
     this.array = new int[10];
     System.out.println(this.array.length);
-  }
+  }//end SuperArray
 
+  /*
+   * N: add
+   * P: adds a value to an empty slot
+   * I: value
+   * R: an array with an empty slot filled
+   */
   public void add(int val){
     for(int i = 0; i < this.array.length; i++){
       if (array[i] == 0){
@@ -25,7 +31,14 @@ public class SuperArray{
     int lastNum = this.array.length-1;
     this.array[lastNum] = val;
 
-  }
+  }//end add
+
+  /*
+   * N: add
+   * P: adds a value at a specific spot
+   * I: value and index
+   * R: an array with an value added at a specific index
+   */
   public void add(int index, int val){
     grow(1);
 
@@ -34,8 +47,14 @@ public class SuperArray{
     }
     this.array[index] = val;
 
-  }
+  }//end add
 
+  /*
+   * N: grow
+   * P: makes the array larger by a certain length
+   * I: length
+   * R: an array growed by a certain amount
+   */
   public void grow(int n){
     int[] tempArray = new int[this.array.length];
 
@@ -49,12 +68,19 @@ public class SuperArray{
       this.array[i] = tempArray[i];
     }
 
-  }
+  }//end grow
+
   //sets value at a specific index
   public void set(int i, int val){
     this.array[i] = val;
-  }
+  }//end set
 
+  /*
+   * N: isEmpty
+   * P: checks to see if the array is empty
+   * I: none
+   * R: returns true/false
+   */
   public boolean isEmpty(){
     for(int i = 0; i < this.array.length; i++){
       if (array[i] != 0){
@@ -62,8 +88,14 @@ public class SuperArray{
       }
     }
     return true;
-  }
+  }//end isEmpty
 
+  /*
+   * N: remove
+   * P: removes a value at an index
+   * I: index
+   * R: returns an array with a value at that index removed
+   */
   public void remove(int index){
     int[] temp = new int[this.array.length - 1];
 
@@ -76,8 +108,14 @@ public class SuperArray{
       }
     }
     this.array = temp;
-  }
+  }//end remove
 
+  //get the length of the array
+  public int getLength(){
+    return this.array.length;
+  }//end getLength
+
+  //toString method
   public String toString(){
     String str = "{";
     for (int i = 0; i < this.array.length; i++){
@@ -90,5 +128,5 @@ public class SuperArray{
     }
     str += " }";
     return str;
-  }
+  }//end toString
 }
