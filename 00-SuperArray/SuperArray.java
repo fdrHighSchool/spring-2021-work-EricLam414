@@ -6,12 +6,10 @@ public class SuperArray{
   // constructor
   public SuperArray(int s){
     this.array = new int[s];
-    System.out.println(this.array.length);
   }//end SuperArray
 
   public SuperArray(){
     this.array = new int[10];
-    System.out.println(this.array.length);
   }//end SuperArray
 
   /*
