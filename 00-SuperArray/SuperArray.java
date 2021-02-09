@@ -113,6 +113,10 @@ public class SuperArray{
     return this.array.length;
   }//end getLength
 
+  public int getValue(int index){
+    return this.array[index];
+  }
+
   //toString method
   public String toString(){
     String str = "{";
