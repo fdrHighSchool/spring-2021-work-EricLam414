@@ -1,0 +1,19 @@
+A class can only inherit from one parent class using extends
+
+Inheritance allows you to reuse data and behavior from the parent class.
+
+An inheritance either have a has-a or an is-a relationship
+
+Subclasses cannot access the private instance variables in the parent class and constructors are not inherited
+
+Using super() can initalize instance variables by calling the constructor
+
+You can override an inherited method by having a method in the child class with the same method signature
+
+Getters and setters can be used to access instance variables
+
+You can use super.method() to force the parent’s method to be called.
+
+A super class variable can hold an object of its child classes
+
+An arrayList can be created using the superclass type and hold subclass types.
