@@ -1,0 +1,10 @@
+public static boolean isMountain(int[] array){
+  int peak = getPeakIndex(array);
+  if(peak == -1){
+    return false;
+  }
+  if(isIncreasing[array, peak] && isDecreasing[array, peak]){
+    return true;
+  }
+  return false;
+}
