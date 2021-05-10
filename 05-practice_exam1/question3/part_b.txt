@@ -1,0 +1,14 @@
+public boolean updateAllTemps(double tolerance){
+  double newTemps[][] = new double[this.temps.length][this.temps[].length];
+  boolean withinTolerance = true;
+  for(int r = 0; r < this.temps.length; r++){
+    for(int c = 0; c < this.temps[0].length; c++){
+      newtemps[r][c] = computeTemp(r, c);
+      if(Math.abs(newTemps[r][c] - this.temps[r][c]) > tolerance){
+        withinTolerance = false;
+      }
+    }
+  }
+  this.temps = newTemps;
+  return withinTolerance;
+}

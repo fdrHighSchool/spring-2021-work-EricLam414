@@ -1,0 +1,10 @@
+private double computeTemp(int row, int col){
+  int r = row;
+  int c = col;
+  double average = 0.0;
+  if(r == 0 || c == 0 || r == this.temps.length - 1 || c == this.temps[0].length - 1){
+    return this.temps[r][c];
+  }
+  average += this.temps[r+1][c] + this.temps[r-1][c] + this.temps[r][c-1] + this.temps[r][c+1];
+  return (average / 4);
+}
