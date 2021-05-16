@@ -1,0 +1,5 @@
+public void addMembers(String[] names, int gradYear){
+  for(String student; names){
+    this.memberList.add(new MemberInfo(student, gradYear, true));
+  }
+}

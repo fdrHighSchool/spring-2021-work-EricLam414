@@ -1,0 +1,13 @@
+public static int[][] resize(int[][] array2D){
+  int[][] smaller = new int[numNonZeroRows][array2D[0].length];
+  int newRow = 0;
+  for(int r = 0; r < array2D.length; r++){
+    if(isNonZeroRow(array2D, r)){
+      for(int c = 0; c < array2D[0].length; c++){
+        smaller[newRow][c] = array2D[r][c];
+      }
+      newRow++;
+    }
+  }
+  return smaller;
+}
