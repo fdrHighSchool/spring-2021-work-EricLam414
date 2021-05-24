@@ -14,6 +14,7 @@ void draw(){
   fills(124,148,159,255);
   quarterCircleDotted(300, 170, 50, 0); //dotted head
   quarterCircleDotted(300, 170, 50, 90); //dotted head
+  fillWhite();
   star(280, 170, 18);//head star
   strokeWeight(1);
   fillBrown();
@@ -57,12 +58,12 @@ void draw(){
   arc(480, 550, 50, 50, radians(270), radians(450));
   fills(238,240,203,255);
   arc(120, 550, 50, 50, radians(270), radians(450));
-  arc(480, 550, 50, 50, radians(90), radians(270)); 
+  arc(480, 550, 50, 50, radians(90), radians(270));
   fills(213,231,202,255);
   quarterCircleDotted(120, 550, 25, 0);
   quarterCircleDotted(120, 550, 25, 90);
   quarterCircleDotted(476, 550, 25, 180);
-  quarterCircleDotted(476, 550, 25, 270); 
+  quarterCircleDotted(476, 550, 25, 270);
   fills(247,242,192,255);
   rect(308, 575, 35, 40);
   rect(257, 575, 35, 40);
@@ -70,8 +71,8 @@ void draw(){
   arc(293, 615, 71, 80, radians(90), radians(270));
   arc(308, 615, 70, 80, radians(270), radians(450));
   fills(0, 0, 0);
-  quarterCircleDotted(287, 615, 35, 270); 
-  quarterCircleDotted(308, 615, 35, 0); 
+  quarterCircleDotted(287, 615, 35, 270);
+  quarterCircleDotted(308, 615, 35, 0);
   fills(247,242,192,255);
   rect(308, 575, 12, 80);
   rect(280, 575, 12, 80);
@@ -120,7 +121,27 @@ void draw(){
   fills(233,241,236,255);
   triangle(360, 76, 410, 76, 410, 126);
   triangle(200, 395, 150, 395, 150, 345);
-} 
+  fills(243,244,194,255);
+  star(60, 220, 20);
+  star(520, 280, 20);
+  fills(223,177,97,255);
+  circle(520, 200, 50);
+  fills(233,203,137,255);
+  quarterCircleDotted(515, 200, 25, 180);
+  quarterCircleDotted(515, 200, 25, 270);
+  fills(240,221,166,255);
+  strokeWeight(5);
+  line(480, 200, 560, 200);
+  fills(247,247,193,255);
+  strokeWeight(1);
+  circle(60, 290, 50);
+  fills(238,218,157,255);
+  quarterCircleDotted(55, 290, 25, 180);
+  quarterCircleDotted(55, 290, 25, 270);
+  strokeWeight(5);
+  fills(223,175,93,255);
+  line(20, 290, 100, 290);
+}
 void fillCyan(){
   fills(224,240,227,255);
 }
@@ -143,7 +164,6 @@ void fills(int r, int b, int g, int a){
 }
 
 void star(int x, int y, int l){
-  fillWhite();
   strokeWeight(2);
   line(x, y - 4*l/5, x, y + 4*l/5);
   line(x - l/2, y, x + l/2, y);
@@ -152,7 +172,7 @@ void star(int x, int y, int l){
 }
 void rectDotted(int x, int y, int x2, int y2){
   for(int r = x + 2; r < x2 - 2; r += 5){
-    int odd = 0; 
+    int odd = 0;
     for(int c = y + 2; c < y2 - 2; c += 5){
        if(odd % 2 == 1){
          square(r + 2, c, 1);
@@ -169,7 +189,7 @@ void triangleDotted(int x, int y, int x2, int y2){
   slope *= 1.4;
   slope = 1 / slope;
   for(int r = x; r < x2; r += 5){
-    int odd = 0; 
+    int odd = 0;
     for(int c = y2 + 4; c > y + (r - x) * slope; c -= 5){
        if(odd % 2 == 1){
          square(r + 2, c, 1);
@@ -180,7 +200,7 @@ void triangleDotted(int x, int y, int x2, int y2){
        odd++;
     }
   }
-  
+
 }
 void quarterCircleDotted(int x, int y, int r, int d){
   if(d == 0 || d == 360){
@@ -195,7 +215,7 @@ void quarterCircleDotted(int x, int y, int r, int d){
   else if(d == 270){
     Dotted270(x, y, r);
   }
-  
+
 }
 void Dotted0(int x, int y, int r){
   for(int row = x; row < x + r; row += 5){
@@ -210,7 +230,7 @@ void Dotted0(int x, int y, int r){
       odd++;
     }
   }
-  
+
 }
 void Dotted90(int x, int y, int r){
   for(int row = x; row < x + r; row += 5){
@@ -225,7 +245,7 @@ void Dotted90(int x, int y, int r){
       odd++;
     }
   }
-  
+
 }
 void Dotted180(int x, int y, int r){
   for(int row = x; row > x - r; row -= 5){
