@@ -1,3 +1,4 @@
+import java.util.*;
 boolean player1 = true;
 boolean player2 = false;
 String winner = "";
@@ -25,20 +26,20 @@ void draw(){
         board[r][c] = "-";
       }
       if(board[r][c].equals("X") || board[r][c].equals("O")){
-        text(board[r][c], (r * 100) + 25, (c * 100) + 75);
+        text(board[r][c], (c * 100) + 25, (r * 100) + 75);
       }
     }
   }
   String player = "";
   if(player1)
     player += "It is Player 1 (X)'s turn";
-  else
+  else if(player2)
     player += "It is Player 2 (O)'s turn";
   textSize(25);
   text(player, 17, 323);
-
+  
   textSize(75);
-  fill(255);
+  fill(255);  
   if(hasWon()){
     noStroke();
     rect(0, 0, 300, 325);
@@ -46,16 +47,16 @@ void draw(){
     textSize(50);
     fill(0);
     text(str, 20, 160);
-
+    
     textSize(25);
     text("Press r to play again", 23, 300);
     if(keyPressed && key == 'r'){
       player1 = true;
       player2 = false;
-      count = 0;
+      count = 0; 
       board = new String[3][3];
     }
-  }
+  } 
   else if(count == 9){
     noStroke();
     rect(0, 0, 300, 325);
@@ -63,17 +64,101 @@ void draw(){
     textSize(50);
     fill(0);
     text(str, 50, 160);
-
     textSize(25);
     text("Press r to play again", 23, 300);
     if(keyPressed && key == 'r'){
       player1 = true;
       player2 = false;
-      count = 0;
+      count = 0; 
       board = new String[3][3];
     }
   }
+  else if(player2){ 
+    nextMove();
+    for(int r = 0; r < 3; r++){
+      for(int c = 0; c < 3; c ++){
+        System.out.print(board[r][c] + " ");
+      }
+      System.out.println();
+    }
+  }
 
+  
+}
+void nextMove(){
+    boolean turn = true;
+    int bestScore = Integer.MIN_VALUE;
+    int[] bestMove = new int[2];
+    for(int r = 0; r < 3; r++){
+      for(int c = 0; c < 3; c ++){
+          if((board[r][c] == null || board[r][c].equals("-")) && turn){
+            board[r][c] = "O";
+            System.out.println("O");
+            int score = minimax(board, 0, false, count);
+            System.out.println(score);
+            board[r][c] = "-";
+            if(score > bestScore){
+              bestScore = score;
+              bestMove[0] = r;
+              bestMove[1] = c;
+            }
+          }
+      }
+    }
+    board[bestMove[0]][bestMove[1]] = "O";
+    player1 = true;
+    player2 = false;
+    turn = false;
+    count++;
+}
+int minimax(String[][] board, int depth, boolean isMaximizing, int turns){
+  boolean result = hasWon();
+  if(result){
+    if(winner == "X"){
+      winner = "";
+      return 1;
+    }
+    else if(winner == "O"){
+      winner = "";
+      return -1;
+    }
+  }
+  else if(turns == 9){
+    winner = "";
+    return 0;
+  }
+  if(isMaximizing){
+    int bestScore = Integer.MIN_VALUE;
+    for(int r = 0; r < 3; r++){
+      for(int c = 0; c < 3; c ++){
+          if(board[r][c] == null || board[r][c].equals("-")){
+            board[r][c] = "O";
+            int score = minimax(board, depth + 1, true, turns + 1);
+            board[r][c] = "-";
+            if(score > bestScore){
+              bestScore = score;
+            }
+          }
+      }
+    }
+    return bestScore; 
+  }
+  else{
+    int bestScore = Integer.MAX_VALUE;
+    for(int r = 0; r < 3; r++){
+      for(int c = 0; c < 3; c ++){
+        if(board[r][c] == null || board[r][c].equals("-")){
+            board[r][c] = "X";
+            int score = minimax(board, depth + 1, trueurns + 1);
+            board[r][c] = "-";
+          if(score < bestScore){
+            bestScore = score;
+          }
+        }
+      }
+    }
+    return bestScore;
+  }
 }
 void mouseClicked(){
     textSize(75);
@@ -82,24 +167,18 @@ void mouseClicked(){
     int y = mouseY;
     for(int r = 0; r < 300; r += 100){
       for(int c = 0; c < 300; c += 100){
-        if(x > r && x < r + 100 && y > c && y < c + 100){
+        if(y > r && y < r + 100 && x > c && x < c + 100){
           if(board[r/100][c/100] == null || board[r/100][c/100].equals("-")){
             if(player1){
               board[r/100][c/100] = "X";
               player1 = false;
               player2 = true;
               count++;
-            }
-            else if(player2){
-              board[r/100][c/100] = "O";
-              player2 = false;
-              player1 = true;
-              count++;
-            }
+            }         
           }
         }
       }
-    }
+    }  
 }
 boolean hasWon(){
   for(int i = 0; i < 3; i++) {
