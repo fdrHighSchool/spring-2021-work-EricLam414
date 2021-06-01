@@ -1,6 +1,6 @@
 import java.util.*;
-boolean player1 = true;
-boolean player2 = false;
+boolean player1 = false;
+boolean player2 = true;
 String winner = "";
 String[][] board = new String[3][3];
 int count = 0;
@@ -67,33 +67,25 @@ void draw(){
     textSize(25);
     text("Press r to play again", 23, 300);
     if(keyPressed && key == 'r'){
-      player1 = true;
-      player2 = false;
+      player1 = false;
+      player2 = true;
       count = 0; 
       board = new String[3][3];
     }
   }
   else if(player2){ 
     nextMove();
-    for(int r = 0; r < 3; r++){
-      for(int c = 0; c < 3; c ++){
-        System.out.print(board[r][c] + " ");
-      }
-      System.out.println();
-    }
   }
 
   
 }
 void nextMove(){
-    boolean turn = true;
     int bestScore = Integer.MIN_VALUE;
     int[] bestMove = new int[2];
     for(int r = 0; r < 3; r++){
       for(int c = 0; c < 3; c ++){
-          if((board[r][c] == null || board[r][c].equals("-")) && turn){
+          if(board[r][c] == null || board[r][c].equals("-")){
             board[r][c] = "O";
-            System.out.println("O");
             int score = minimax(board, 0, false, count);
             System.out.println(score);
             board[r][c] = "-";
@@ -108,19 +100,18 @@ void nextMove(){
     board[bestMove[0]][bestMove[1]] = "O";
     player1 = true;
     player2 = false;
-    turn = false;
     count++;
 }
 int minimax(String[][] board, int depth, boolean isMaximizing, int turns){
   boolean result = hasWon();
   if(result){
-    if(winner == "X"){
+    if(winner.equals("X")){
       winner = "";
-      return 1;
+      return -10;
     }
-    else if(winner == "O"){
+    else if(winner.equals("O")){
       winner = "";
-      return -1;
+      return 10;
     }
   }
   else if(turns == 9){
@@ -133,11 +124,9 @@ int minimax(String[][] board, int depth, boolean isMaximizing, int turns){
       for(int c = 0; c < 3; c ++){
           if(board[r][c] == null || board[r][c].equals("-")){
             board[r][c] = "O";
-            int score = minimax(board, depth + 1, true, turns + 1);
+            int score = minimax(board, depth + 1, false, turns + 1);
             board[r][c] = "-";
-            if(score > bestScore){
-              bestScore = score;
-            }
+            bestScore = max(score, bestScore);
           }
       }
     }
@@ -148,12 +137,10 @@ int minimax(String[][] board, int depth, boolean isMaximizing, int turns){
     for(int r = 0; r < 3; r++){
       for(int c = 0; c < 3; c ++){
         if(board[r][c] == null || board[r][c].equals("-")){
-            board[r][c] = "X";
-            int score = minimax(board, depth + 1, trueurns + 1);
-            board[r][c] = "-";
-          if(score < bestScore){
-            bestScore = score;
-          }
+          board[r][c] = "X";
+          int score = minimax(board, depth + 1, true, turns + 1);
+          board[r][c] = "-";
+          bestScore = min(score, bestScore);
         }
       }
     }
